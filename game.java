@@ -198,4 +198,18 @@ public class game{
 		}
 	}
 	
+	public String toBinary(int a) {	// double check
+		String retVal = "";
+		while ( a > 0 ) {
+			int t = a % 2;
+			retVal = retVal + t;	//make sure this works
+			a = a/2;
+		}
+		return retVal;
+	}
+	
+	public int toDecimal(String a) {
+		return Integer.parseInt(a, 2);
+	}
+	
 }
