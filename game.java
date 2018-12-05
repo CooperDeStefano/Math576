@@ -171,21 +171,21 @@ public class game{
 	public int nimAdd(int a, int b) {
 		String aString = toBinary(a);
 		String bString = toBinary(b);
-		String retString = ""
-		if (aString.length < bString.length) {
+		String retString = "";
+		if (aString.length() < bString.length()) {
 			String temp = aString;
 			aString = bString;
 			bString = temp;
 		}
 		int aPos = 0;
 		int bPos = 0;
-		for (int i = 0; i < bString.length; i++) {
-			aPos = aString.length -1 -i;
-			bPos = bString.length -1 -i;
+		for (int i = 0; i < bString.length(); i++) {
+			aPos = aString.length() -1 -i;
+			bPos = bString.length() -1 -i;
 			String val = nand(aString.charAt(aPos), bString.charAt(bPos));
 			retString = val + retString;
 		}
-		retString = aString.substring(0, aPos);
+		retString = aString.substring(0, aPos) + retString;
 		return toDecimal(retString);
 	}
 	
@@ -198,11 +198,11 @@ public class game{
 		}
 	}
 	
-	public String toBinary(int a) {	// double check 
+	public String toBinary(int a) { 
 		String retVal = "";
 		while ( a > 0 ) {
 			int t = a % 2;
-			retVal = retVal + t;	//make sure this works
+			retVal = t + retVal;	
 			a = a/2;
 		}
 		return retVal;
