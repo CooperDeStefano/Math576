@@ -198,11 +198,11 @@ public class game{
 		}
 	}
 	
-	public String toBinary(int a) {	// double check
+	public String toBinary(int a) {
 		String retVal = "";
 		while ( a > 0 ) {
 			int t = a % 2;
-			retVal = retVal + t;	//make sure this works
+			retVal = retVal + t;
 			a = a/2;
 		}
 		return retVal;
