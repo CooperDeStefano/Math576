@@ -3,13 +3,15 @@ import java.util.Scanner;
 import java.lang.Math;
 
 public class game{
+	int gamevalue[] = {0,0,1,1,1,2,2,0,3,3,1,1,1,0,4,3,3,3,2,2,2,4,4,0,5,5,2,2,2,3,3,0,5}; //length 33
+
 	public static void main(String[] args) {
 		boolean player1Win = false;
 		boolean player2Win = false;
 		Scanner keyboard = new Scanner(System.in);
 		
 		int n = 0;
-		System.out.println("Please enter a size for the game");
+		System.out.println("Please enter a size 3-31 for the game");
 		n = keyboard.nextInt();
 		String[] field = new String[n];
 		for(int i = 0; i < field.length; i++)
@@ -125,7 +127,6 @@ public class game{
 		
 		return 0;
 	}
-	int gamevalue[] = {0,0,1,1,1,2,2,0,3,3,1,1,1,0,4,3,3,3,2,2,2,4,4,0,5,5,2,2,2,3,3,0,5}; //length 33
 	public static int twoInARow(String[] x)
 	{
 		int check = 0;
@@ -167,6 +168,18 @@ public class game{
 		}
 		return -1;
 	}
+	
+	public int nimAdd(int[] heaps)
+	{
+		int retVal = 0;
+		for (int i = 0; i < heaps.length; i++) {
+			retVal = nimAdd(retVal, heaps[i]);
+		}
+		return retVal;
+	}
+	
+	
+	
 	
 	public int nimAdd(int a, int b) {
 		String aString = toBinary(a);
@@ -210,6 +223,12 @@ public class game{
 	
 	public int toDecimal(String a) {
 		return Integer.parseInt(a, 2);
+	}
+	
+	public int pickMove(int[] gaps) {
+		for (int i : gaps) {
+			
+		}
 	}
 	
 }
