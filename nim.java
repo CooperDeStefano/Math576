@@ -29,12 +29,23 @@ public class nim{
 		{	
 			if(x%2 == 0) // player turn
 			{
-				System.out.println("Pick a heap");
-				int picked = keyboard.nextInt();
-				//TODO add constraints
-				System.out.println("How many do you want to remove?");
-				int remove = keyboard.nextInt();
-				//TODO add constraints
+				boolean done = false;
+				while (!done) {	
+					System.out.println("Pick a heap");
+					int picked = keyboard.nextInt();
+					if (picked > 0 && picked < heaps.length) {
+						done = true;
+					}
+				}
+				done = false;
+				while(!done) {
+					System.out.println("How many do you want to remove?");
+					int remove = keyboard.nextInt();
+					if (remove > 0 && remove <= heaps[picked]) {
+						done = true;
+					}
+				}
+
 				heaps[picked] = heaps[picked] - remove;
 			}
 			
