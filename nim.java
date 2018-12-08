@@ -6,7 +6,7 @@ public class nim{
 	public static void main(String[] args) {
 		boolean player1Win = false;
 		boolean CPUWin = false;
-		Scanner keyoard = new Scanner(System.in);
+		Scanner keyboard = new Scanner(System.in);
 		
 		Random rand = new Random();
 		int numHeaps = rand.nextInt(10) + 1;
@@ -61,11 +61,15 @@ public class nim{
 				}
 				heaps[bestHeap] = heaps[bestHeap] - bestMove;
 			}
-			
+			for(int i = 0; i < heaps.length; i++)
+			{
+				System.out.print(heaps[i] + "\t");
+			}
+			System.out.println();
 			x = (x+1)%2;
 		}
 	}
-	public int nimAdd(int a, int b) {
+	public static int nimAdd(int a, int b) {
 		String aString = toBinary(a);
 		String bString = toBinary(b);
 		String retString = "";
@@ -86,7 +90,7 @@ public class nim{
 		return toDecimal(retString);	
 	}
 	
-	public int nimAdd(int[] heaps)
+	public static int nimAdd(int[] heaps)
 	{
 		int retVal = 0;
 		for (int i = 0; i < heaps.length; i++) {
@@ -95,7 +99,7 @@ public class nim{
 		return retVal;
 	}
 	
-	public String nand(char a, char b) {
+	public static String nand(char a, char b) {
 		if (a == b) {
 			return "0";
 		}
@@ -104,7 +108,7 @@ public class nim{
 		}
 	}
 	
-	public String toBinary(int a) { 
+	public static String toBinary(int a) { 
 		String retVal = "";
 		while ( a > 0 ) {
 			int t = a % 2;
@@ -114,7 +118,7 @@ public class nim{
 		return retVal;
 	}
 	
-	public int toDecimal(String a) {
+	public static int toDecimal(String a) {
 		return Integer.parseInt(a, 2);
 	}
 }
