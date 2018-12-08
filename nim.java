@@ -37,8 +37,7 @@ public class nim{
 				//TODO add constraints
 				heaps[picked] = heaps[picked] - remove;
 			}
-			
-			if(x%2 == 1) //CPU turn
+			else if(x%2 == 1) //CPU turn
 			{
 				int[] temp = heaps;
 				int bestHeap = -1;
@@ -66,6 +65,33 @@ public class nim{
 				System.out.print(heaps[i] + "\t");
 			}
 			System.out.println();
+			for(int i = 0; i < heaps.length; i++)
+			{
+				if(x%2 == 0)
+				{
+					if(heaps[i] == 0)
+					{
+						player1Win = true;
+					}
+					else
+					{
+						player1Win = false;
+						break;
+					}
+				}
+				else if(x%2 == 1)
+				{
+					if(heaps[i] == 0)
+					{
+						CPUWin = true;
+					}
+					else
+					{
+						CPUWin = false;
+						break;
+					}
+				}
+			}
 			x = (x+1)%2;
 		}
 	}
