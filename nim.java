@@ -9,7 +9,7 @@ public class nim{
 		Scanner keyboard = new Scanner(System.in);
 		
 		Random rand = new Random();
-		int numHeaps = rand.nextInt(10) + 1;
+		int numHeaps = rand.nextInt(10) + 3;
 		
 		int heaps[] = new int[numHeaps];
 		
@@ -24,12 +24,13 @@ public class nim{
 		}
 		System.out.println();
 		
-		int x = rand.nextInt();
+		int x = rand.nextInt(3)%2;
 		//int x = 1;
 		while(!player1Win && !CPUWin)
 		{	
 			if(x%2 == 0) // player turn
 			{
+				//System.out.println("Player's turn");
 				boolean done = false;
 				int picked = 0;
 				int remove = 0;
@@ -54,19 +55,22 @@ public class nim{
 			}
 			else if(x%2 == 1) //CPU turn
 			{
+				System.out.println("Computer's turn");
 				int[] temp = new int[heaps.length];
 				for (int i = 0; i < heaps.length; i++) {
 					temp[i] = heaps[i];
 				}
 				int bestHeap = -1;
 				int bestMove = -1;
-				int nimmed = nimAdd(heaps);
+				int nimmed = 15;
+				//System.out.println("Nim value of current game = " + nimmed);
 				//TODO need to do something if 0 game
 				for(int i = 0; i < temp.length; i++)
 				{
+					//System.out.println("Checking column " + i);
 					for(int j = 1; j <= heaps[i]; j++)
 					{
-
+						//System.out.println("Test removing " + j);
 						/*
 						System.out.print("look here\t");
 						for(int k = 0; k < heaps.length; k++)
@@ -77,12 +81,14 @@ public class nim{
 						System.out.println();
 						*/
 						temp[i] = temp[i] - j;
-						nimmed = nimAdd(temp);
-						if(nimmed == 0)
+						//nimmed = nimAdd(temp);
+						if(nimmed > nimAdd(temp))
 						{
+							nimmed = nimAdd(temp);
+							//System.out.println("Nim value is now " + nimmed);
 							bestHeap = i;
 							bestMove = j;
-							//System.out.println("The best move is column " + bestHeap + ". The best move is " + bestMove);
+							//System.out.println("The best move is column " + (bestHeap+1) + ". Remove " + bestMove);
 						}
 						temp[i] = heaps[i];
 					}
