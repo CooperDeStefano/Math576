@@ -25,35 +25,64 @@ public class nim{
 		System.out.println();
 		
 		int x = rand.nextInt();
+		//int x = 1;
 		while(!player1Win && !CPUWin)
 		{	
 			if(x%2 == 0) // player turn
 			{
-				System.out.println("Pick a heap");
-				int picked = keyboard.nextInt();
-				//TODO add constraints
-				System.out.println("How many do you want to remove?");
-				int remove = keyboard.nextInt();
-				//TODO add constraints
+				boolean done = false;
+				int picked = 0;
+				int remove = 0;
+				while (!done) {	
+					System.out.println("Pick a heap");
+					picked = keyboard.nextInt();
+					picked--;
+					if (picked >= 0 && picked < heaps.length && heaps[picked] != 0) {
+						done = true;
+					}
+				}
+				done = false;
+				while(!done) {
+					System.out.println("How many do you want to remove?");
+					remove = keyboard.nextInt();
+					if (remove > 0 && remove <= heaps[picked]) {
+						done = true;
+					}
+				}
+
 				heaps[picked] = heaps[picked] - remove;
 			}
 			else if(x%2 == 1) //CPU turn
 			{
-				int[] temp = heaps;
+				int[] temp = new int[heaps.length];
+				for (int i = 0; i < heaps.length; i++) {
+					temp[i] = heaps[i];
+				}
 				int bestHeap = -1;
 				int bestMove = -1;
 				int nimmed = nimAdd(heaps);
-				
+				//TODO need to do something if 0 game
 				for(int i = 0; i < temp.length; i++)
 				{
 					for(int j = 1; j <= heaps[i]; j++)
 					{
+
+						/*
+						System.out.print("look here\t");
+						for(int k = 0; k < heaps.length; k++)
+						{
+							
+							System.out.print(heaps[k] + "\t");
+						}
+						System.out.println();
+						*/
 						temp[i] = temp[i] - j;
 						nimmed = nimAdd(temp);
 						if(nimmed == 0)
 						{
 							bestHeap = i;
 							bestMove = j;
+							//System.out.println("The best move is column " + bestHeap + ". The best move is " + bestMove);
 						}
 						temp[i] = heaps[i];
 					}
@@ -67,37 +96,35 @@ public class nim{
 			System.out.println();
 			for(int i = 0; i < heaps.length; i++)
 			{
+				if(heaps[i] != 0)
+				{
+					player1Win = false;
+					CPUWin = false;
+					break;
+				}
 				if(x%2 == 0)
 				{
-					if(heaps[i] == 0)
-					{
-						player1Win = true;
-					}
-					else
-					{
-						player1Win = false;
-						break;
-					}
+					player1Win = true;
 				}
-				else if(x%2 == 1)
+				else
 				{
-					if(heaps[i] == 0)
-					{
-						CPUWin = true;
-					}
-					else
-					{
-						CPUWin = false;
-						break;
-					}
+					CPUWin = true;
 				}
 			}
 			x = (x+1)%2;
+		}
+		if(player1Win)
+		{
+			System.out.println("You win!");
+		}
+		else{
+			System.out.println("You lose!");
 		}
 	}
 	public static int nimAdd(int a, int b) {
 		String aString = toBinary(a);
 		String bString = toBinary(b);
+		//System.out.println("a = " + a + " b = " + b);
 		String retString = "";
 		if (aString.length() < bString.length()) {
 			String temp = aString;
@@ -113,6 +140,7 @@ public class nim{
 			retString = val + retString;
 		}
 		retString = aString.substring(0, aPos) + retString;
+		//System.out.println("retString = " + retString);
 		return toDecimal(retString);	
 	}
 	
@@ -121,6 +149,7 @@ public class nim{
 		int retVal = 0;
 		for (int i = 0; i < heaps.length; i++) {
 			retVal = nimAdd(retVal, heaps[i]);
+			//System.out.println("retVal = " + retVal);
 		}
 		return retVal;
 	}
@@ -136,6 +165,9 @@ public class nim{
 	
 	public static String toBinary(int a) { 
 		String retVal = "";
+		if (a == 0) {
+			return "0";
+		}
 		while ( a > 0 ) {
 			int t = a % 2;
 			retVal = t + retVal;	
@@ -145,6 +177,11 @@ public class nim{
 	}
 	
 	public static int toDecimal(String a) {
-		return Integer.parseInt(a, 2);
+		if(a.isEmpty()) {
+			return 0;
+		}
+		else {
+			return Integer.parseInt(a, 2);
+		}
 	}
 }
